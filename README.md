@@ -1,2 +1,2 @@
 # BeanBot
-A bot to either show weather updates or deepfry images
+A Discord bot to either show weather updates or deepfry images
