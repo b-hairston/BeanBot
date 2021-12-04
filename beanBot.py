@@ -4,7 +4,7 @@ import discord
 from dotenv import load_dotenv
 from discord.ext import commands
 
-load_dotenv(dotenv_path='.env')
+load_dotenv(dotenv_path='C:/Users/Ben/Desktop/.env')
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
 
@@ -15,15 +15,7 @@ client = discord.Client(intents=intents)
 bot = commands.Bot(command_prefix='!')
 
 
-@client.event
-async def on_ready():
-    guild = discord.utils.get(client.guilds, name=GUILD)
-
-    print(
-        f'{client.user.name} has connected to Discord!')
-
-
-@client.event
+@bot.event
 async def on_message(message):
     if message.author == client.user:
         return
@@ -48,7 +40,14 @@ async def create_channel(ctx, channel_name='real-python'):
         await guild.create_text_channel(channel_name)
 
 
-@client.event
+
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.errors.CheckFailure):
+        await ctx.send('You do not have the correct role for this command.')
+bot.run(TOKEN)
+
+@bot.event
 async def on_error(event, *args, **kwargs):
     with open('logs/err.log', 'a') as f:
         if event == 'on_message':
@@ -56,5 +55,10 @@ async def on_error(event, *args, **kwargs):
         else:
             raise
 
+bot.run(TOKEN)
 
-client.run(TOKEN)
+
+
+
+
+
