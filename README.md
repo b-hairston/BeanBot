@@ -1,2 +1,2 @@
 # BeanBot
-A Discord bot to either show weather updates or deepfry images
+A Discord bot to learn the Discord API and also shitpost more efficiently
